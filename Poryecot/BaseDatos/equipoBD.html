@@ -44,6 +44,15 @@ para identificar con precisión los dispositivos a reparar y dar seguimiento en 
   <li>tipo_pantalla</li>
 </ul>
 
+<h3>Normalización de la tabla Equipo</h3>
+<p>
+La tabla <strong>Equipo</strong> está normalizada porque cumple con:
+</p>
+<ul>
+  <li><strong>1NF:</strong> Cada columna contiene valores atómicos y no repetitivos, como <em>marca</em>, <em>modelo</em> y <em>fabricante_cpu</em>.</li>
+  <li><strong>2NF:</strong> Todos los atributos dependen completamente de la clave primaria <em>Id_equipo</em>, sin depender parcialmente de otra columna.</li>
+  <li><strong>3NF:</strong> No hay dependencias transitivas entre columnas no clave; por ejemplo, <em>tipo_almacenamiento</em> y <em>tamaño_almacenamiento</em> dependen directamente de <em>Id_equipo</em> y no de otra columna.</li>
+</ul>
 
   <h2>Código SQL para crear tabla Equipo</h2>
 <pre><code>CREATE TABLE Equipo (

@@ -36,37 +36,60 @@
     <li>notas</li>
   </ul>
 
-  <h2>Código SQL para crear tabla Diagnósticos</h2>
-  <pre><code>CREATE TABLE Diagnosticos (
-    Id_diagnostico VARCHAR(20) PRIMARY KEY, -- Formato: DG-YYYY-####
-    Id_orden_servicio INT NOT NULL,         -- Identificador de la orden de servicio
-    Id_personal INT NOT NULL,               -- Identificador del personal que realiza el diagnóstico
+<h3>Normalización de la tabla Diagnosticos</h3>
+<p>
+La tabla <strong>Diagnosticos</strong> está normalizada porque cumple con:
+</p>
+<ul>
+  <li><strong>1NF:</strong> Cada columna contiene valores atómicos y no repetitivos, como <em>sintomas_reportados</em> y <em>pruebas_realizadas</em>.</li>
+  <li><strong>2NF:</strong> Todos los atributos dependen completamente de la clave primaria <em>Id_diagnostico</em>.</li>
+  <li><strong>3NF:</strong> No hay dependencias transitivas entre columnas no clave; por ejemplo, <em>diagnostico_preliminar</em> depende directamente de <em>Id_diagnostico</em> y no de otra columna.</li>
+</ul>
 
+
+  <h2>Código SQL para crear tabla Diagnósticos</h2>
+  <pre><code>
+    CREATE TABLE Diagnosticos (
+    Id_diagnostico VARCHAR(20) PRIMARY KEY,   -- Formato: DG-YYYY-####
+    Id_equipo VARCHAR(50) NOT NULL,           -- FK hacia Equipo
     sintomas_reportados TEXT NOT NULL,
     pruebas_realizadas TEXT,
     hallazgos TEXT,
     diagnostico_preliminar TEXT,
-
-    id_item TEXT,                           -- Lista de refacciones o servicios requeridos (puede ser JSON o texto delimitado)
-
-    total_cotizado AS (
-        0
-    ) PERSISTED,                             -- Campo calculado, inicializado en 0 por simplicidad
-
-    aprobado_por_cliente BIT DEFAULT 0,      -- 0 = pendiente, 1 = aprobado
+    aprobado_por_cliente BIT DEFAULT 0,
     fecha_aprobacion DATETIME NULL,
-    notas TEXT NULL
+    notas TEXT,
+    CONSTRAINT FK_Diagnosticos_Equipo FOREIGN KEY (Id_equipo) REFERENCES Equipo(Id_equipo)
 );
 
--- Ejemplo de inserción de datos
+
+CREATE TABLE Diagnostico_Items (
+    Id_diagnostico VARCHAR(20) NOT NULL,
+    item VARCHAR(100) NOT NULL,
+    cantidad INT NOT NULL DEFAULT 1,
+    costo_unitario DECIMAL(10,2) NOT NULL,
+    CONSTRAINT PK_Diagnostico_Items PRIMARY KEY (Id_diagnostico, item),
+    CONSTRAINT FK_Diagnostico_Items_Diagnosticos FOREIGN KEY (Id_diagnostico) REFERENCES Diagnosticos(Id_diagnostico)
+);
+
 INSERT INTO Diagnosticos (
-    Id_diagnostico, Id_orden_servicio, Id_personal, sintomas_reportados, pruebas_realizadas,
-    hallazgos, diagnostico_preliminar, id_item, aprobado_por_cliente, notas
+    Id_diagnostico, Id_equipo, sintomas_reportados, pruebas_realizadas,
+    hallazgos, diagnostico_preliminar, aprobado_por_cliente, fecha_aprobacion, notas
 )
-VALUES (
-    'DG-2025-0001', 101, 5, 'No enciende', 'Verificación de fuente y batería', 
-    'Fuente dañada', 'Se requiere cambio de fuente', '["Fuente 65W", "Mano de obra"]', 0, 'Cliente contactado'
-);</code></pre>
+VALUES
+('DG-2025-0001', 'EQP-0001', 'No enciende', 'Verificación de fuente y batería', 
+ 'Fuente dañada', 'Se requiere cambio de fuente', 0, NULL, 'Cliente contactado'),
+
+('DG-2025-0002', 'EQP-0002', 'Pantalla parpadea', 'Prueba de pantalla y conexión interna', 
+ 'Cables flojos', 'Reemplazo de flex de pantalla', 1, '2025-09-16', 'Aprobado por el cliente'),
+
+('DG-2025-0003', 'EQP-0003', 'Sobrecalentamiento', 'Prueba de ventilador y pasta térmica', 
+ 'Ventilador obstruido', 'Limpieza interna y cambio de pasta térmica', 0, NULL, 'Pendiente aprobación'),
+
+('DG-2025-0004', 'EQP-0004', 'Teclado no funciona', 'Prueba de conexión y software', 
+ 'Teclado dañado', 'Reemplazo de teclado', 1, '2025-09-17', 'Cliente aprobó cotización');
+
+  </code></pre>
 
 </body>
 </html>
