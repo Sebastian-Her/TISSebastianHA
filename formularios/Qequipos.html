@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario Equipo</title>
+   <link rel="stylesheet" href="../Style/StyleQ.css">
+</head>
+<body>
+<div class="breadcrumb"><a href="../Subsistemas/Equipo.html">Equipos</a> · <a href="../index.html">Inicio</a></div>
+
+<h1>Registrar Equipo</h1>
+
+<form action="/guardar_equipo" method="POST">
+  <label for="id_equipo">Id_equipo (Número serial)</label>
+  <input type="text" id="id_equipo" name="id_equipo" required>
+
+  <label for="marca">Marca</label>
+  <input type="text" id="marca" name="marca" required>
+
+  <label for="modelo">Modelo</label>
+  <input type="text" id="modelo" name="modelo" required>
+
+  <label for="color">Color</label>
+  <input type="text" id="color" name="color">
+
+  <label for="tamaño">Tamaño</label>
+  <input type="text" id="tamaño" name="tamaño">
+
+  <label for="formato">Formato</label>
+  <input type="text" id="formato" name="formato">
+
+  <label for="fabricante_cpu">Fabricante CPU</label>
+  <input type="text" id="fabricante_cpu" name="fabricante_cpu">
+
+  <label for="modelo_cpu">Modelo CPU</label>
+  <input type="text" id="modelo_cpu" name="modelo_cpu">
+
+  <label for="nomenclatura_cpu">Nomenclatura CPU</label>
+  <input type="text" id="nomenclatura_cpu" name="nomenclatura_cpu">
+
+  <label for="fabricante_almacenamiento">Fabricante Almacenamiento</label>
+  <input type="text" id="fabricante_almacenamiento" name="fabricante_almacenamiento">
+
+  <label for="tipo_almacenamiento">Tipo Almacenamiento</label>
+  <select id="tipo_almacenamiento" name="tipo_almacenamiento" required>
+    <option value="">Selecciona...</option>
+    <option value="HDD">HDD</option>
+    <option value="SSD-SATA">SSD-SATA</option>
+    <option value="SSD-NVME">SSD-NVME</option>
+    <option value="SSD-2.5inch">SSD-2.5inch</option>
+  </select>
+
+  <label for="tamaño_almacenamiento">Tamaño Almacenamiento</label>
+  <input type="text" id="tamaño_almacenamiento" name="tamaño_almacenamiento" required>
+
+  <label for="fabricante_ram">Fabricante RAM</label>
+  <input type="text" id="fabricante_ram" name="fabricante_ram">
+
+  <label for="version_ram">Versión RAM</label>
+  <select id="version_ram" name="version_ram" required>
+    <option value="">Selecciona...</option>
+    <option value="DDR1">DDR1</option>
+    <option value="DDR2">DDR2</option>
+    <option value="DDR3">DDR3</option>
+    <option value="DDR4">DDR4</option>
+    <option value="DDR5">DDR5</option>
+    <option value="GDDR1">GDDR1</option>
+    <option value="GDDR2">GDDR2</option>
+    <option value="GDDR3">GDDR3</option>
+    <option value="GDDR4">GDDR4</option>
+    <option value="GDDR5">GDDR5</option>
+    <option value="GDDR6">GDDR6</option>
+    <option value="GDDR6X">GDDR6X</option>
+  </select>
+
+  <label for="velocidad_ram">Velocidad RAM</label>
+  <input type="text" id="velocidad_ram" name="velocidad_ram" placeholder="Ej: 3200MHz">
+
+  <label for="fabricante_gpu">Fabricante GPU</label>
+  <input type="text" id="fabricante_gpu" name="fabricante_gpu">
+
+  <label for="modelo_gpu">Modelo GPU</label>
+  <input type="text" id="modelo_gpu" name="modelo_gpu">
+
+  <label for="vram_gpu">VRAM GPU</label>
+  <input type="text" id="vram_gpu" name="vram_gpu" placeholder="Ej: 4GB">
+
+  <label for="resolucion_pantalla">Resolución Pantalla</label>
+  <input type="text" id="resolucion_pantalla" name="resolucion_pantalla" placeholder="Ej: 1920x1080">
+
+  <label for="tipo_pantalla">Tipo Pantalla</label>
+  <input type="text" id="tipo_pantalla" name="tipo_pantalla" placeholder="Ej: LED, LCD">
+
+  <button type="submit">Guardar Equipo</button>
+</form>
+
+</body>
+</html>

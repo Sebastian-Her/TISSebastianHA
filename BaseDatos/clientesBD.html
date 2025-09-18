@@ -1,0 +1,87 @@
+<!DOCTYPE html> 
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Clientes · Principal</title>
+  <link rel="stylesheet" href="../Style/style2.css">
+</head>
+<body>
+
+  <div class="breadcrumb"><a href="../Subsistemas/Clientes.html">Clientes</a> · <a href="../index.html">Inicio</a></div>
+
+  <h1>Diseño de la base de datos del subsistema</h1>
+  <p class="lead">Diagrama de la tabla en la base de datos</p>
+  <img src="../Assets/img2.png" alt="Diagrama de subsistemas" width="500">
+
+  <h3>Objetivo</h3>
+  <p>
+    Registrar y administrar los datos de clientes, mediante un sistema centralizado, para identificar, contactar y dar seguimiento personalizado a los servicios realizados dentro del negocio de reparación.
+  </p>
+
+  <h3>Campos</h3>
+  <ul>
+    <li>Id_cliente</li>
+    <li>primer_nombre</li>
+    <li>segundo_nombre</li>
+    <li>ap_paterno</li>
+    <li>ap_materno</li>
+    <li>teléfono</li>
+    <li>direccion</li>
+    <li>sexo: hombre, mujer, prefiero no decirlo</li>
+    <li>fecha_nac</li>
+    <li>edad* (Campo calculado)</li>
+  </ul>
+
+  <h3>Normalización de la tabla Clientes</h3>
+<p>
+La tabla <strong>Clientes</strong> está normalizada porque cumple con:
+</p>
+<ul>
+  <li><strong>1NF:</strong> Cada columna contiene valores atómicos y no repetitivos; por ejemplo, la dirección se descompuso en <em>calle</em>, <em>colonia</em>, <em>municipio</em>, <em>estado</em> y <em>pais</em>.</li>
+  <li><strong>2NF:</strong> Todos los atributos dependen completamente de la clave primaria <em>Id_cliente</em>, sin depender parcialmente de otra columna.</li>
+  <li><strong>3NF:</strong> No existen dependencias transitivas entre columnas no clave; cada campo depende únicamente de <em>Id_cliente</em> y no de otra columna.</li>
+</ul>
+
+  <h2>Código SQL para crear tabla Clientes</h2>
+  <pre><code>
+    CREATE TABLE Clientes (
+    Id_cliente INT IDENTITY(1,1) PRIMARY KEY,
+    primer_nombre VARCHAR(50) NOT NULL,
+    segundo_nombre VARCHAR(50) NULL,
+    ap_paterno VARCHAR(50) NOT NULL,
+    ap_materno VARCHAR(50) NULL,
+    telefono VARCHAR(20),
+    calle VARCHAR(100),
+    colonia VARCHAR(100),
+    municipio VARCHAR(100),
+    estado VARCHAR(100),
+    pais VARCHAR(50),
+    sexo VARCHAR(20) CHECK (sexo IN ('hombre','mujer','prefiero no decirlo')),
+    fecha_nac DATE NOT NULL,
+    edad AS DATEDIFF(YEAR, fecha_nac, GETDATE()), -- campo calculado
+    fecha_registro DATETIME DEFAULT GETDATE(),
+    notas VARCHAR(MAX)
+);
+
+
+INSERT INTO Clientes (
+    primer_nombre, segundo_nombre, ap_paterno, ap_materno, telefono,
+    calle, colonia, municipio, estado, pais, sexo, fecha_nac, notas
+)
+VALUES
+('Ana', 'María', 'Ramírez', 'López', '555-000-1111',
+ 'Calle 1 #123', 'Centro', 'Toluca', 'México', 'México', 'mujer', '1990-05-12', 'Cliente frecuente'),
+ 
+('Luis', NULL, 'Mora', 'González', '555-000-2222',
+ 'Calle 2 #456', 'La Merced', 'Toluca', 'México', 'México', 'hombre', '1985-11-23', 'Prefiere contacto por email'),
+
+('Carla', 'Elena', 'Sánchez', 'Ramírez', '555-000-3333',
+ 'Avenida Central #789', 'San Juan', 'Toluca', 'México', 'México', 'mujer', '1992-07-15', 'Cliente nuevo'),
+
+('Jorge', 'Alberto', 'Gutiérrez', 'Hernández', '555-000-4444',
+ 'Boulevard Independencia #101', 'Santa María', 'Toluca', 'México', 'México', 'hombre', '1980-02-28', 'Cliente VIP');
+</code></pre>
+
+</body>
+</html>

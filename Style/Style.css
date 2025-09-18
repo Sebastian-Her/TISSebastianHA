@@ -1,0 +1,12 @@
+body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; margin: 2rem; }
+    header { margin-bottom: 2rem; }
+    h1 { margin: 0 0 0.25rem; }
+    hr { margin: 1.5rem 0; }
+    section { margin: 1.75rem 0; }
+    h2 { margin: 0 0 0.5rem; }
+    h3 { margin: 0.75rem 0 0.25rem; }
+    ul { margin: 0.25rem 0 0.75rem 1.2rem; }
+    .nota { font-size: 0.9rem; opacity: 0.8; }
+    .flag { font-size: 0.9rem; font-style: italic; }
+    figure { margin: 0 0 1.5rem; }
+    img { max-width: 100%; height: auto; display: block; }
