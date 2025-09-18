@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario Clientes</title>
+  <link rel="stylesheet" href="../Style/StyleQ.css">
+</head>
+<body>
+<div class="breadcrumb"><a href="../Subsistemas/Clientes.html">Clientes</a> · <a href="../index.html">Inicio</a></div>
+
+<h1>Registrar Cliente</h1>
+
+<form action="/guardar_cliente" method="POST">
+  <label for="primer_nombre">Primer Nombre</label>
+  <input type="text" id="primer_nombre" name="primer_nombre" required>
+
+  <label for="segundo_nombre">Segundo Nombre</label>
+  <input type="text" id="segundo_nombre" name="segundo_nombre">
+
+  <label for="ap_paterno">Apellido Paterno</label>
+  <input type="text" id="ap_paterno" name="ap_paterno" required>
+
+  <label for="ap_materno">Apellido Materno</label>
+  <input type="text" id="ap_materno" name="ap_materno">
+
+  <label for="telefono">Teléfono</label>
+  <input type="text" id="telefono" name="telefono">
+
+  <label for="direccion">Dirección</label>
+  <input type="text" id="direccion" name="direccion">
+
+  <label for="sexo">Sexo</label>
+  <select id="sexo" name="sexo">
+    <option value="">Selecciona...</option>
+    <option value="hombre">Hombre</option>
+    <option value="mujer">Mujer</option>
+    <option value="prefiero no decirlo">Prefiero no decirlo</option>
+  </select>
+
+  <label for="fecha_nac">Fecha de Nacimiento</label>
+  <input type="date" id="fecha_nac" name="fecha_nac" required>
+
+  <!-- Edad se calculará automáticamente en la base de datos, no se ingresa manualmente -->
+
+  <label for="notas">Notas / Observaciones</label>
+  <textarea id="notas" name="notas" rows="4" placeholder="Comentarios adicionales"></textarea>
+
+  <button type="submit">Guardar Cliente</button>
+</form>
+
+</body>
+</html>

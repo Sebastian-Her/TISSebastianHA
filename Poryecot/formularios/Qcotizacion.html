@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario Diagnóstico y Cotización</title>
+  <link rel="stylesheet" href="../Style/StyleQ.css">
+</head>
+<body>
+<div class="breadcrumb"><a href="../Subsistemas/Diagnostico.html">Diagnóstico y Cotización</a> · <a href="../index.html">Inicio</a></div>
+
+<h1>Registrar Diagnóstico y Cotización</h1>
+
+<form action="/guardar_diagnostico" method="POST">
+  <label for="id_diagnostico">ID Diagnóstico (DG-YYYY-####)</label>
+  <input type="text" id="id_diagnostico" name="id_diagnostico" required>
+
+  <label for="id_orden_servicio">ID Orden de Servicio</label>
+  <input type="number" id="id_orden_servicio" name="id_orden_servicio" required>
+
+  <label for="id_personal">ID Personal</label>
+  <input type="number" id="id_personal" name="id_personal" required>
+
+  <label for="sintomas_reportados">Síntomas Reportados</label>
+  <textarea id="sintomas_reportados" name="sintomas_reportados" rows="4" required></textarea>
+
+  <label for="pruebas_realizadas">Pruebas Realizadas</label>
+  <textarea id="pruebas_realizadas" name="pruebas_realizadas" rows="4"></textarea>
+
+  <label for="hallazgos">Hallazgos</label>
+  <textarea id="hallazgos" name="hallazgos" rows="4"></textarea>
+
+  <label for="diagnostico_preliminar">Diagnóstico Preliminar</label>
+  <textarea id="diagnostico_preliminar" name="diagnostico_preliminar" rows="4"></textarea>
+
+  <label for="id_item">Lista de Refacciones / Servicios (JSON o texto delimitado)</label>
+  <textarea id="id_item" name="id_item" rows="4" placeholder='Ej: ["Fuente 65W", "Mano de obra"]'></textarea>
+
+  <!-- total_cotizado se calculará automáticamente en la base de datos, no se ingresa manualmente -->
+
+  <label for="aprobado_por_cliente">Aprobado por Cliente</label>
+  <select id="aprobado_por_cliente" name="aprobado_por_cliente">
+    <option value="0" selected>Pendiente</option>
+    <option value="1">Aprobado</option>
+  </select>
+
+  <label for="fecha_aprobacion">Fecha de Aprobación</label>
+  <input type="datetime-local" id="fecha_aprobacion" name="fecha_aprobacion">
+
+  <label for="notas">Notas / Comentarios</label>
+  <textarea id="notas" name="notas" rows="4" placeholder="Comentarios adicionales"></textarea>
+
+  <button type="submit">Guardar Diagnóstico</button>
+</form>
+
+</body>
+</html>
